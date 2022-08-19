@@ -29,8 +29,13 @@ namespace deneme33.Controllers
         }
 
         [HttpPost("RegisterUser")]
-        public async Task<object> RegisterUser([FromBody] AddUpdateRegisterUserBindingModel model)
+        public async Task<ActionResponse<AddUpdateRegisterUserBindingModel>> RegisterUser([FromBody] AddUpdateRegisterUserBindingModel model)
         {
+            ActionResponse<AddUpdateRegisterUserBindingModel> actionResponse = new()
+            {
+                ResponseType = ResponseType.Ok,
+                IsSuccessful = true,
+            };
             try {
                 model.FullName = model.FullName.Replace(" ", "");
 
@@ -40,44 +45,60 @@ namespace deneme33.Controllers
                     Email=model.Email,
                     NormalizedEmail=model.Email.Normalize().ToUpperInvariant(),
                     NormalizedUserName=model.FullName.Normalize().ToUpperInvariant(),
-                DateCreated=DateTime.UtcNow,
-                DateModified=DateTime.UtcNow
-            };
-             var result = await _userManager.CreateAsync(user, model.Password);
-            if (result.Succeeded)
+                    DateCreated=DateTime.UtcNow,
+                    DateModified=DateTime.UtcNow
+                };
+                var userCheck = await _userManager.CreateAsync(user, model.Password);
+                if (userCheck.Succeeded)
+                {
+                    return actionResponse;
+                }     
+            }
+            catch (Exception ex)
             {
-                return await Task.FromResult("User has been Registered");
+                actionResponse.ResponseType = ResponseType.Error;
+                actionResponse.IsSuccessful = false;
+                actionResponse.Errors.Add(ex.Message);
+               
             }
-            return await Task.FromResult(string.Join(",",result.Errors.Select(x=>x.Description).ToArray()));
-            }
-            catch(Exception ex)
-            {
-                return await Task.FromResult(ex.Message);
-            }
+            return actionResponse;
+
         }
 
         [HttpGet("GetAllUser")]
         public async Task<ActionResponse<List<UserDTO>>> GetAllUser()
         {
-            ActionResponse<List<UserDTO>> result = new ActionResponse<List<UserDTO>>(); 
+            ActionResponse<List<UserDTO>> actionResponse = new()
+            {
+                    ResponseType = ResponseType.Ok,
+                    IsSuccessful = true,
+             };
             try
             {
                 var users = _userManager.Users.Select(x => new  UserDTO(x.FullName , x.Email , x.UserName , x.DateCreated)).ToList();
-                result.Data=users;
-                result.IsSuccessful=true;
-                return  result;
+                actionResponse.Data=users;
+                //actionResponse.IsSuccessful=true;
             }
             catch(Exception ex)
             {
-                result.IsSuccessful=false;
-                return result;
+                actionResponse.IsSuccessful=false;
+               
             }
+            return actionResponse;
+
+
         }
 
         [HttpPost("Login")]
 
-        public async Task<object> Login([FromBody] loginBindingModel model)
+        public async Task<loginBindingModel> Login([FromBody] loginBindingModel model)
         {
+            ActionResponse<loginBindingModel> actionResponse = new()
+            {
+                ResponseType = ResponseType.Ok,
+                IsSuccessful = true,
+            };
+
             try
             {
                 var user = new AppUser()
@@ -86,18 +107,18 @@ namespace deneme33.Controllers
                 //NormalizedEmail=model.Email.Normalize().ToUpperInvariant(),
                     PasswordHash = model.Password
                 };
-                user.PasswordHash = "AQAAAAEAACcQAAAAEBlrJCgJ83Jj8gymuesYHHER2Z/eIIdJb/AsEh2rQdfzDsn5Jhkz+53CEtubXNOFrA==";
+                //user.PasswordHash = "AQAAAAEAACcQAAAAEBlrJCgJ83Jj8gymuesYHHER2Z/eIIdJb/AsEh2rQdfzDsn5Jhkz+53CEtubXNOFrA==";
 
-                if (model.FullName=="" || model.Password=="")
+                if (model.FullName!="" || model.Password="")
                 {
-                    return await Task.FromResult("Parameters are missing");
+                    actionResponse.IsSuccessful = false;
                 }
                
                     var result = await _signInManager.PasswordSignInAsync(user.UserName, user.PasswordHash, false, false);
 
                 if (result.Succeeded)
                 {
-                    return await Task.FromResult("Login successfully!");
+                    return actionResponse;  
                 }
 
                 return await Task.FromResult("Invalid Email or Password");
