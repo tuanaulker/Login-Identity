@@ -6141,11 +6141,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sıla\\source\\repos\\deneme33\\deneme33\\deneme33.csproj",
+      "projectUniqueName": "C:\\Users\\Sıla\\Documents\\GitHub\\Login-Identity\\Login-Identity\\deneme33\\deneme33.csproj",
       "projectName": "deneme33",
-      "projectPath": "C:\\Users\\Sıla\\source\\repos\\deneme33\\deneme33\\deneme33.csproj",
+      "projectPath": "C:\\Users\\Sıla\\Documents\\GitHub\\Login-Identity\\Login-Identity\\deneme33\\deneme33.csproj",
       "packagesPath": "C:\\Users\\Sıla\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sıla\\source\\repos\\deneme33\\deneme33\\obj\\",
+      "outputPath": "C:\\Users\\Sıla\\Documents\\GitHub\\Login-Identity\\Login-Identity\\deneme33\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Sıla\\AppData\\Roaming\\NuGet\\NuGet.Config",

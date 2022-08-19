@@ -10,5 +10,6 @@ namespace deneme33.Data.Entities
         public DateTime DateModified { get; set; }
 
         public DateTime DateCreated { get; set; }
+
     }
 }

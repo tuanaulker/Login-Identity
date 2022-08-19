@@ -42,7 +42,7 @@ namespace deneme33.Controllers
                 DateCreated=DateTime.UtcNow,
                 DateModified=DateTime.UtcNow
             };
-            var result = await _userManager.CreateAsync(user, model.Password);
+             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
                 return await Task.FromResult("User has been Registered");
@@ -66,6 +66,41 @@ namespace deneme33.Controllers
             {
                 return await Task.FromResult(ex.Message);
             }
+        }
+
+        [HttpPost("Login")]
+
+        public async Task<object> Login([FromBody] loginBindingModel model)
+        {
+            try
+            {
+                var user = new AppUser()
+                {
+                    UserName=model.FullName.Replace(" ", ""),
+                //NormalizedEmail=model.Email.Normalize().ToUpperInvariant(),
+                    PasswordHash = model.Password
+                };
+                user.PasswordHash = "AQAAAAEAACcQAAAAEBlrJCgJ83Jj8gymuesYHHER2Z/eIIdJb/AsEh2rQdfzDsn5Jhkz+53CEtubXNOFrA==";
+
+                if (model.FullName=="" || model.Password=="")
+                {
+                    return await Task.FromResult("Parameters are missing");
+                }
+               
+                    var result = await _signInManager.PasswordSignInAsync(user.UserName, user.PasswordHash, false, false);
+
+                if (result.Succeeded)
+                {
+                    return await Task.FromResult("Login successfully!");
+                }
+
+                return await Task.FromResult("Invalid Email or Password");
+            }
+            catch(Exception ex)
+            {
+                return await Task.FromResult(ex.Message);
+            }
+
         }
     }
 }
