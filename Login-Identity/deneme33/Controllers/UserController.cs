@@ -1,4 +1,5 @@
-﻿using deneme33.BindingModel;
+﻿using Application.Infrastructure;
+using deneme33.BindingModel;
 using deneme33.Data.Entities;
 using deneme33.DTO;
 using Microsoft.AspNetCore.Identity;
@@ -56,15 +57,20 @@ namespace deneme33.Controllers
         }
 
         [HttpGet("GetAllUser")]
-        public async Task<object> GetAllUser()
+        public async Task<ActionResponse<List<UserDTO>>> GetAllUser()
         {
+            ActionResponse<List<UserDTO>> result = new ActionResponse<List<UserDTO>>(); 
             try
             {
-                var users = _userManager.Users.Select(x => new  UserDTO(x.FullName , x.Email , x.UserName , x.DateCreated));
-                return await Task.FromResult(users);
-            }catch(Exception ex)
+                var users = _userManager.Users.Select(x => new  UserDTO(x.FullName , x.Email , x.UserName , x.DateCreated)).ToList();
+                result.Data=users;
+                result.IsSuccessful=true;
+                return  result;
+            }
+            catch(Exception ex)
             {
-                return await Task.FromResult(ex.Message);
+                result.IsSuccessful=false;
+                return result;
             }
         }
 
