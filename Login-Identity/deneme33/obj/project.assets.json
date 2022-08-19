@@ -6136,19 +6136,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Sıla\\.nuget\\packages\\": {}
+    "C:\\Users\\Tuana\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Sıla\\Documents\\GitHub\\Login-Identity\\Login-Identity\\deneme33\\deneme33.csproj",
+      "projectUniqueName": "C:\\Users\\Tuana\\Documents\\GitHub\\Login-Identity\\Login-Identity\\deneme33\\deneme33.csproj",
       "projectName": "deneme33",
-      "projectPath": "C:\\Users\\Sıla\\Documents\\GitHub\\Login-Identity\\Login-Identity\\deneme33\\deneme33.csproj",
-      "packagesPath": "C:\\Users\\Sıla\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Sıla\\Documents\\GitHub\\Login-Identity\\Login-Identity\\deneme33\\obj\\",
+      "projectPath": "C:\\Users\\Tuana\\Documents\\GitHub\\Login-Identity\\Login-Identity\\deneme33\\deneme33.csproj",
+      "packagesPath": "C:\\Users\\Tuana\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Tuana\\Documents\\GitHub\\Login-Identity\\Login-Identity\\deneme33\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Sıla\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Tuana\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -6221,7 +6221,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.302\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

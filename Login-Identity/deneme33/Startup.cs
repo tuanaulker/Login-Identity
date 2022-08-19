@@ -31,7 +31,7 @@ namespace deneme33
         {
             services.AddDbContext<AppDBContext>(opt =>
             {
-                opt.UseSqlServer(Configuration.GetConnectionString("HollieConnection"));
+                opt.UseSqlServer(Configuration.GetConnectionString("AuthConnection"));
             });
             services.AddIdentity<AppUser, IdentityRole>(opt => { }).AddEntityFrameworkStores<AppDBContext>();
             services.AddControllers();
